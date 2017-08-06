@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  belongs_to :category, :optional => true
+
   before_validation :generate_friendly_id, :on => :create
 
   validates_presence_of :name, :friendly_id
