@@ -13,6 +13,7 @@ gem 'devise'
 gem "devise-i18n"
 gem "rails-i18n"
 gem "select2-rails"
+gem "nested_form_fields"
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use Puma as the app server
