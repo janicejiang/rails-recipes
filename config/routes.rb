@@ -15,6 +15,10 @@ Rails.application.routes.draw do
       collection do
         post :bulk_update
       end
+
+      member do
+        post :reorder
+      end
     end
 
     resources :users do

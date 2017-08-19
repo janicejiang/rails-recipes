@@ -1,7 +1,8 @@
 class Admin::EventsController < AdminController
 
   def index
-    @events = Event.all
+    # @events = Event.all
+    @events = Event.rank(:row_order).all
   end
 
   def show
@@ -18,7 +19,11 @@ class Admin::EventsController < AdminController
     @event = Event.new(event_params)
 
     if @event.save
-      redirect_to admin_events_path
+      # redirect_to admin_events_path
+      respond_to do |format|
+        format.html { redirect_to admin_events_path }
+        format.json { render :json => { :message => "ok" }}
+      end
     else
       render "new"
     end
@@ -65,6 +70,14 @@ class Admin::EventsController < AdminController
     end
 
     flash[:alert] = "成功完成 #{total} 笔"
+    redirect_to admin_events_path
+  end
+
+  def reorder
+    @event = Event.find_by_friendly_id!(params[:id])
+    @event.row_order_position = params[:position]
+    @event.save!
+
     redirect_to admin_events_path
   end
 
